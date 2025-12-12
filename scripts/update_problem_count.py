@@ -50,24 +50,29 @@ def update_readme_badge(readme_path: Path, research_count: int, algo_count: int)
     
     content = readme_path.read_text()
     
-    # Create badge line
-    badge_line = f"![Research Problems](https://img.shields.io/badge/Research_Problems-{research_count}-blue) ![Algorithmic Problems](https://img.shields.io/badge/Algorithmic_Problems-{algo_count}-green)\n\n"
+    # Create the research and algorithmic badges
+    research_badge = f"![Research Problems](https://img.shields.io/badge/Research_Problems-{research_count}-blue)"
+    algo_badge = f"![Algorithmic Problems](https://img.shields.io/badge/Algorithmic_Problems-{algo_count}-green)"
     
-    # Find where to insert badges (after the title line)
-    lines = content.split('\n')
+    # Replace existing badges using regex
+    import re
     
-    # Remove old badge line if exists
-    lines = [line for line in lines if not line.startswith('![Research Problems]')]
+    # Replace Research Problems badge
+    content = re.sub(
+        r'!\[Research Problems\]\(https://img\.shields\.io/badge/Research_Problems-\d+-blue\)',
+        research_badge,
+        content
+    )
     
-    # Insert new badge line after the header links line
-    for i, line in enumerate(lines):
-        if '[Website]' in line and '[GitHub]' in line:
-            lines.insert(i + 1, '')
-            lines.insert(i + 2, badge_line.strip())
-            break
+    # Replace Algorithmic Problems badge
+    content = re.sub(
+        r'!\[Algorithmic Problems\]\(https://img\.shields\.io/badge/Algorithmic_Problems-\d+-green\)',
+        algo_badge,
+        content
+    )
     
     # Write back
-    readme_path.write_text('\n'.join(lines))
+    readme_path.write_text(content)
     print(f"✅ Updated README with counts: Research={research_count}, Algorithmic={algo_count}")
 
 
