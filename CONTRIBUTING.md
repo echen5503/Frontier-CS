@@ -4,9 +4,6 @@ Frontier-CS is currently an **invitation-only** project for new problems. We wel
 
 Please create a GitHub pull request (PR) with your proposed problem following the guidelines below. After your PR is reviewed and merged, please send any hidden test data and reference solutions to the contact email provided at the end of this document.
 
----
-
-## Table of Contents
 
 - [Algorithmic Problems](#algorithmic-problems)
   - [Problem Submission Process](#problem-submission-process)
@@ -17,11 +14,9 @@ Please create a GitHub pull request (PR) with your proposed problem following th
   - [Problem Submission Process](#research-problem-submission-process)
   - [Problem Structure](#research-problem-structure)
   - [Evaluation Flow](#evaluation-flow)
-  - [Adding a New Research Problem](#adding-a-new-research-problem)
+  - [Step by Step](#step-by-step)
   - [Problem Hierarchy](#problem-hierarchy-categories-and-variants)
 - [Contact](#contact)
-
----
 
 ## Algorithmic Problems
 
@@ -51,7 +46,7 @@ algorithmic/problems/{problem_id}/
 
 ### Required Files
 
-#### `config.yaml`
+#### config.yaml
 
 Defines the problem configuration:
 
@@ -65,7 +60,7 @@ subtasks:
     n_cases: 10       # Number of test cases (= 1 for public version)
 ```
 
-#### `statement.txt`
+#### statement.txt
 
 The problem statement should include:
 
@@ -77,11 +72,11 @@ The problem statement should include:
 - **Memory Limit**: Memory usage limit
 - **Sample Input/Output**: At least one example with explanation
 
-#### `chk.cc` 
+#### chk.cc
 
 Evaluator for scoring logic
 
-#### `testdata/`
+#### testdata/
 
 Test cases with inputs (`.in`) and expected outputs (`.ans`):
 
@@ -103,8 +98,6 @@ Include in your email:
 - Complete test data set (all `.in` and `.ans` files)
 - Reference solution(s) with explanation
 - Any additional notes on test case design
-
----
 
 ## Research Problems
 
@@ -150,17 +143,14 @@ class Solution:
 config.yaml → set_up_env.sh → solve.sh → evaluate.sh → evaluator.py → score (0-100)
 ```
 
----
-
-## Adding a New Research Problem
-
-### 1. Create Problem Directory
+### Step by Step
+#### 1. Create Problem Directory
 
 ```bash
 mkdir -p research/{problem_name}/resources
 ```
 
-### 2. Create `config.yaml`
+#### 2. Create `config.yaml`
 
 ```yaml
 tag: hpc                   # Category: os, hpc, ai, db, pl, security
@@ -180,36 +170,34 @@ runtime:
   environment: "CUDA 12.2, Python 3.11, PyTorch 2.0+"
 ```
 
-### 3. Create Evaluation Scripts
+#### 3. Create Evaluation Scripts
 
-**`set_up_env.sh`**: Prepare environment
+**set_up_env.sh**: Prepare environment
 ```bash
 #!/bin/bash
 # Install dependencies, download data, etc.
 ```
 
-**`evaluate.sh`**: Run evaluation
+**evaluate.sh**: Run evaluation
 ```bash
 #!/bin/bash
 python evaluator.py
 ```
 
-**`evaluator.py`**: Score the solution (last line must be numeric score)
+**evaluator.py**: Score the solution (last line must be numeric score)
 ```python
 # ... evaluation logic ...
 print(score)  # Must be last line!
 ```
 
-### 4. Register the Problem
+#### 4. Register the Problem
 
 Add to `research/problems.txt`:
 ```
 research/{problem_name}
 ```
 
----
-
-## Problem Hierarchy: Categories and Variants
+### Problem Hierarchy: Categories and Variants
 
 Research problems follow a hierarchical structure:
 
@@ -224,7 +212,7 @@ Problem (e.g., gemm_optimization, poc_generation)
 | **Category** | — | Scores aggregated for leaderboard |
 | **Variant** | Evaluated independently | Contributes to category score |
 
-### Example: Simple Variants
+#### Example: Simple Variants
 
 ```
 research/gemm_optimization/
@@ -236,7 +224,7 @@ research/gemm_optimization/
 └── transformerish/    # Variant (category = transformerish)
 ```
 
-### Example: Nested Variants
+#### Example: Nested Variants
 
 For problems with many variants per category:
 
@@ -253,7 +241,7 @@ research/poc_generation/
     └── ...
 ```
 
-### Registering Problems
+#### Registering Problems
 
 Add each **variant** (not category) to `problems.txt`:
 ```
@@ -262,8 +250,6 @@ research/gemm_optimization/rectangles
 research/poc_generation/heap_buffer_overflow/arvo_21000
 research/poc_generation/heap_buffer_overflow/arvo_47101
 ```
-
----
 
 ## Contact
 
@@ -276,5 +262,3 @@ Please include:
 - Area of expertise
 - Type of contribution (algorithmic/research problem)
 - Brief description of your proposed contribution
-
----
