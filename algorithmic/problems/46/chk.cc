@@ -131,12 +131,13 @@ int main(int argc, char* argv[]) {
     long long b = ans.readLong();
     long long B = max(a,b), T = min(a,b); // order-agnostic
     long long P = compute_makespan(I, seq);
-    double ratio = 0.0;
+    double ratio = 0.0, unbounded_ratio = 0.0;
     if (B <= T) ratio = (P <= T) ? 1.0 : 0.0;
     else {
         ratio = double(B - P) / double(B - T);
+        unbounded_ratio = std::max(0.0, ratio);
         if (ratio < 0.0) ratio = 0.0;
-            if (ratio > 1.0) ratio = 1.0;
+        if (ratio > 1.0) ratio = 1.0;
     }
-    quitp(ratio, "Makespan: %lld. Baseline: %lld. Best: %lld. Ratio: %.6f", P, B, T, ratio);
+    quitp(ratio, "Makespan: %lld. Baseline: %lld. Best: %lld. Ratio: %.6f, RatioUnbounded: %.6f", P, B, T, ratio, unbounded_ratio);
 }

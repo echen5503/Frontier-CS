@@ -105,15 +105,16 @@ int main(int argc, char* argv[]) {
     if (!std::isfinite(r_geom) || r_geom < 0) r_geom = 0.0;
 
     // Scoring
-    double score = 0.0;
+    double score = 0.0, unbounded_score = 0.0;
     const double EPS_DEN = 1e-15;
     if (best <= baseline + EPS_DEN) {
         score = (r_geom + 1e-18 >= best) ? 1.0 : 0.0;
     } else {
         score = (r_geom - baseline) / (best - baseline);
+        unbounded_score = std::max(0.0, score);
         if (score < 0.0) score = 0.0;
         if (score > 1.0) score = 1.0;
     }
 
-    quitp(score, "Radius: %.12f. Ratio: %.6f", r_geom, score);
+    quitp(score, "Radius: %.12f. Ratio: %.6f, RatioUnbounded: %.6f", r_geom, score, unbounded_score);
 }

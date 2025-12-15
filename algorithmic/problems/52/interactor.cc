@@ -124,8 +124,9 @@ int main(int argc, char* argv[]) {
 
             // Calculate score
             double score_ratio = std::min(1.0, (double)(ref_s1 + ref_s2 + 1) / (double)(s1 + s2 + 1));
+            double unbounded_ratio = (double)(ref_s1 + ref_s2 + 1) / (double)(s1 + s2 + 1);
             
-            quitp(score_ratio, "Correct answer. s1=%d, s2=%d. Ratio: %.4f", s1, s2, score_ratio);
+            quitp(score_ratio, "Correct answer. s1=%d, s2=%d. Ratio: %.4f, RatioUnbounded: %.4f", s1, s2, score_ratio, unbounded_ratio);
 
         }
     }

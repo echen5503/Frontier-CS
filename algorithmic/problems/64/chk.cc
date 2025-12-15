@@ -103,15 +103,16 @@ int main(int argc, char* argv[]) {
     long double err_ld = u128_to_ld(err);
     long double ratio = (18.0L - log1pl(err_ld)) / 18.0L;
     if (ratio < 0.0L) ratio = 0.0L;
+    long double unbounded_ratio = ratio;
     if (ratio > 1.0L) ratio = 1.0L;
 
     long double score100 = ratio * 100.0L;
 
     // Report partial score with details
     quitp((double)ratio,
-          "error=%s, sum=%s, T=%s, score=%.6Lf/100",
+          "error=%s, sum=%s, T=%s, score=%.6Lf/100, RatioUnbounded=%.6Lf",
           to_string_u128(err).c_str(),
           to_string_u128(sum).c_str(),
           to_string_u128(T).c_str(),
-          score100);
+          score100, unbounded_ratio);
 }

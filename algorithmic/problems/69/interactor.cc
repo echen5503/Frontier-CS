@@ -172,15 +172,16 @@ int main(int argc, char* argv[]) {
     // All good: score by compression ratio
     double denom = double(cap - optimal_total_len);
     double your  = double(cap - total_len);
-    double ratio;
+    double ratio, unbounded_ratio = 0.0;
     if (denom <= 0.0) ratio = (your <= 0.0) ? 1.0 : 0.0;
     else {
         ratio = your / denom;
         if (ratio < 0.0) ratio = 0.0;
+        unbounded_ratio = ratio;
         if (ratio > 1.0) ratio = 1.0;
     }
 
     quitp(ratio,
-          "All %d answers valid. Total length = %s, optimal = %s. Ratio: %.4f",
-          q, toString(total_len).c_str(), toString(optimal_total_len).c_str(), ratio);
+          "All %d answers valid. Total length = %s, optimal = %s. Ratio: %.4f, RatioUnbounded: %.4f",
+          q, toString(total_len).c_str(), toString(optimal_total_len).c_str(), ratio, unbounded_ratio);
 }

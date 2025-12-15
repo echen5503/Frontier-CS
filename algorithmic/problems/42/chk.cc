@@ -253,10 +253,11 @@ int main(int argc, char** argv) {
 
     // Ensure [0, 100]
     if (score100 < 0.0) score100 = 0.0;
+    double unbounded_ratio = std::max(0.0, score100 / 100.0);
     if (score100 > 100.0) score100 = 100.0;
 
     // quitp expects a value in [0, 1]. Platforms typically scale by 100.
     double Ratio = score100 / 100.0;
-    quitp(Ratio, "Ratio: %.4f", Ratio);
+    quitp(Ratio, "Ratio: %.4f, RatioUnbounded: %.4f", Ratio, unbounded_ratio);
     return 0;
 }

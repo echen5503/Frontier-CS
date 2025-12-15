@@ -212,13 +212,14 @@ int main(int argc, char* argv[]){
     long long baseline = ans.readLong();
     long long best = ans.readLong();
     long long value = evaluate(P, items);
-    double ratio;
+    double ratio, unbounded_ratio = 0.0;
     if (best <= baseline){
         ratio = (value >= best) ? 1.0 : 0.0;
     }else{
         ratio = (double)(value - baseline) / (double)(best - baseline);
         if (ratio < 0) ratio = 0;
+        unbounded_ratio = std::max(0.0, ratio);
         if (ratio > 1) ratio = 1;
     }
-    quitp(ratio, "Value: %lld. Ratio: %.6f", value, ratio);
+    quitp(ratio, "Value: %lld. Ratio: %.6f, RatioUnbounded: %.6f", value, ratio, unbounded_ratio);
 }

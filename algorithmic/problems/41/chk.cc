@@ -83,9 +83,10 @@ int main(int argc, char** argv) {
     long double threshold = 1.05 * V_base;
     long double rawRatio = V_you / threshold;
     double ratio = rawRatio;
+    double unbounded_ratio = std::max(0.0, ratio);
     if (ratio > 1.0) ratio = 1.0;
     if (ratio < 0.0) ratio = 0.0;
 
-    quitp(ratio, "Ratio: %.4f", ratio);
+    quitp(ratio, "Ratio: %.4f, RatioUnbounded: %.4f", ratio, unbounded_ratio);
     return 0;
 }

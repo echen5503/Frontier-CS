@@ -50,6 +50,7 @@ int main(int argc, char *argv[]) {
   int ref = ans.readInt();
   double score = (2.0*ref-1.0*totcost)/(1.0*ref);
   score = max(score, 0.0);
+  double unbounded_score = std::max(0.0, score);
   score = min(score, 1.0);
-  quitp(score, "Ratio: %.3lf", score);
+  quitp(score, "Ratio: %.3lf, RatioUnbounded: %.3lf", score, unbounded_score);
 }
