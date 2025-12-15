@@ -61,10 +61,10 @@ Here's [Algorithmic Problem 0](algorithmic/problems/0/statement.txt) - try to be
 cd algorithmic && docker compose up -d
 
 # Run the example solution (Human Expert Solution)
-frontier-eval --algorithmic 0 algorithmic/problems/0/examples/reference.cpp
+frontier-eval --algorithmic 0 problems/0/examples/reference.cpp
 
 # Run the example solution (GPT-5 Thinking Solution)
-frontier-eval --algorithmic 0 algorithmic/problems/0/examples/gpt5.cpp
+frontier-eval --algorithmic 0 problems/0/examples/gpt5.cpp
 
 # Try you own solution!
 frontier-eval --algorithmic 0 <your_solution.cpp>
